@@ -53,6 +53,10 @@ configuration:
       type: boolean
     privileged:
       type: boolean
+    userns-mode:
+      type: string
+    codebase:
+      type: boolean
     init:
       type: boolean
     sysctls:
