@@ -215,6 +215,16 @@ if [[ "${BUILDKITE_PLUGIN_DOCKER_PRIVILEGED:-false}" =~ ^(true|on|1)$ ]] ; then
     args+=( "--privileged" )
 fi
 
+# Set userns option
+if [[ -n "${BUILDKITE_PLUGIN_DOCKER_USERNS_MODE:-}" ]] ; then
+  args+=( "--userns=${BUILDKITE_PLUGIN_DOCKER_USERNS_MODE}" )
+fi
+
+# Set CODEBASE variable for volume mounts inside container with absolute path
+if [[ "${BUILDKITE_PLUGIN_DOCKER_CODEBASE:-true}" =~ ^(true|on|1)$ ]] ; then
+    args+=( "--env CODEBASE=${PWD}" )
+fi
+
 # Propagate all environment variables into the container if requested
 if [[ "${BUILDKITE_PLUGIN_DOCKER_PROPAGATE_ENVIRONMENT:-false}" =~ ^(true|on|1)$ ]] ; then
   if [[ -n "${BUILDKITE_ENV_FILE:-}" ]] ; then
