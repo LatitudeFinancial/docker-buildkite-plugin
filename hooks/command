@@ -222,7 +222,7 @@ fi
 
 # Set CODEBASE variable for volume mounts inside container with absolute path
 if [[ "${BUILDKITE_PLUGIN_DOCKER_CODEBASE:-true}" =~ ^(true|on|1)$ ]] ; then
-    args+=( "--env CODEBASE=${PWD}" )
+    args+=( "--env" "CODEBASE=${PWD}" )
 fi
 
 # Propagate all environment variables into the container if requested
