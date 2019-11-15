@@ -61,6 +61,8 @@ configuration:
       type: boolean
     sysctls:
       type: array
+    ipc: 
+      type: string
   required:
     - image
   additionalProperties: false
