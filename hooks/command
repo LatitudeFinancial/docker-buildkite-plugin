@@ -139,6 +139,7 @@ if plugin_read_list_into_result BUILDKITE_PLUGIN_DOCKER_SYSCTLS ; then
   done
 fi
 
+
 # Set workdir if one is provided or if the checkout is mounted
 if [[ -n "${workdir:-}" ]] || [[ "${BUILDKITE_PLUGIN_DOCKER_MOUNT_CHECKOUT:-on}" =~ ^(true|on|1)$ ]]; then
   args+=("--workdir" "${workdir}")
@@ -219,6 +220,12 @@ fi
 if [[ -n "${BUILDKITE_PLUGIN_DOCKER_USERNS_MODE:-}" ]] ; then
   args+=( "--userns=${BUILDKITE_PLUGIN_DOCKER_USERNS_MODE}" )
 fi
+
+# Set ipc option
+if [[ -n "${BUILDKITE_PLUGIN_DOCKER_IPC:-}" ]] ; then
+  args+=( "--ipc=${BUILDKITE_PLUGIN_DOCKER_IPC}" )
+fi
+
 
 # Set CODEBASE variable for volume mounts inside container with absolute path
 if [[ "${BUILDKITE_PLUGIN_DOCKER_CODEBASE:-true}" =~ ^(true|on|1)$ ]] ; then
